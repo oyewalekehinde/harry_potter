@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Harry Potter</string>
+    <string name="character_details">Character Details</string>
+    <string name="alive">Alive</string>
+    <string name="dead">Dead</string>
+    <string name="searchText">Search by character or actor\'s name...</string>
+    <string name="retry">Retry</string>
+    <string name="networkTimeout">Network timeout. Please try again.</string>
+    <string name="networkError">Network error. Please check your connection.</string>
+    <string name="serverError">Server error. Please try again later.</string>
+    <string name="dataNotFound">Data not found.</string>
+    <string name="unknownError">An unknown error occurred.</string>
+    <string name="emptyList">The List is empty</string>
+</resources>
