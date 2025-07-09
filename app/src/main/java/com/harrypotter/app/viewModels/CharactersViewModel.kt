@@ -27,6 +27,9 @@ class CharactersViewModel(
     /**
      * Request the list of [Character] data.
      */
+    init {
+        retrieveData()
+    }
     fun retrieveData(){
       viewModelScope.launch {
           characterRepository.getCharacters().collect{

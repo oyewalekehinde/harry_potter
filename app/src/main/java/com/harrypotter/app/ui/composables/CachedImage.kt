@@ -51,7 +51,7 @@ fun CachedImage(
             modifier = Modifier.heightIn(max = 200.dp).clip(RoundedCornerShape(borderRadius)), // Adjust size as needed
         )}
         if (painter.state is AsyncImagePainter.State.Loading) {
-            ShimmerEffect(200.dp, width = 0.3f)
+            com.harrypotter.mylibrary.ShimmerEffect(200.dp, width = 0.3f)
         }
     }
 }

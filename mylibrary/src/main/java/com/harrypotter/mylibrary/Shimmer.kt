@@ -1,4 +1,4 @@
-package com.harrypotter.app.ui.composables
+package com.harrypotter.mylibrary
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode

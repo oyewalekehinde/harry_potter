@@ -80,13 +80,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.ui.test.junit4.android)
-    testImplementation(libs.junit)
-    testImplementation(libs.junit.junit)
-    androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -119,6 +114,11 @@ dependencies {
     testImplementation ("io.mockk:mockk:1.13.12")
     androidTestImplementation ("io.mockk:mockk-android:1.13.12")
     androidTestImplementation ("com.squareup.okhttp3:mockwebserver:4.9.1")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    androidTestImplementation( "androidx.compose.ui:ui-test-junit4:1.7.3")
+    debugImplementation ("androidx.compose.ui:ui-tooling:1.7.3")
+    androidTestImplementation ("io.insert-koin:koin-test:3.5.0")
+    androidTestImplementation ("io.insert-koin:koin-test-junit4:3.5.0")
+
 
 }

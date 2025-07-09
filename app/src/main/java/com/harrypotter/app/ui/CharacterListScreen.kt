@@ -27,7 +27,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.harrypotter.app.R
@@ -35,14 +34,15 @@ import com.harrypotter.app.domain.model.Character
 import com.harrypotter.app.viewModels.CharactersViewModel
 import com.harrypotter.app.ui.composables.CharacterItem
 import com.harrypotter.app.ui.composables.ErrorComposable
-import com.harrypotter.app.ui.composables.ShimmerEffect
+import com.harrypotter.mylibrary.ShimmerEffect
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CharacterListScreen(charactersViewModel: CharactersViewModel = koinViewModel<CharactersViewModel> (),  onItemClick:(Character)->Unit){
     val alreadyLaunched = rememberSaveable { mutableStateOf(false) }
     val charactersState by charactersViewModel.charactersResults.collectAsState(initial = Resource.Loading())
-    val searchQuery by charactersViewModel.searchQuery.collectAsStateWithLifecycle()
+//    val searchQuery by charactersViewModel.searchQuery.collectAsStateWithLifecycle()
+    val searchQuery = rememberSaveable{ mutableStateOf("") }
     var isRefreshing by remember { mutableStateOf(false) }
     val swipeRefreshState = rememberSwipeRefreshState(isRefreshing)
 
@@ -59,7 +59,7 @@ fun CharacterListScreen(charactersViewModel: CharactersViewModel = koinViewModel
             is Resource.Loading-> LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(12) { _ ->
                     Column {
-                        ShimmerEffect(height = 100.dp)
+                        com.harrypotter.mylibrary.ShimmerEffect(height = 100.dp)
                         Spacer(modifier = Modifier.height(15.dp))
                     }
                 }
@@ -68,8 +68,10 @@ fun CharacterListScreen(charactersViewModel: CharactersViewModel = koinViewModel
                 val characters: List<Character> = (charactersState as Resource.Success<List<Character>>).data
                 Column {
                     OutlinedTextField(
-                        value = searchQuery,
-                        onValueChange = { charactersViewModel.onSearchQueryChanged(it)},
+                        value = searchQuery.value,
+                        onValueChange = { charactersViewModel.onSearchQueryChanged(it)
+                                        searchQuery.value=it
+                                        },
                         placeholder = { Text(stringResource(R.string.searchText), maxLines = 1) },
                         modifier = Modifier
                             .fillMaxWidth()

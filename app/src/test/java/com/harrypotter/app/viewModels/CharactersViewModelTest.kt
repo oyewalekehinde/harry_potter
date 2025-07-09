@@ -30,7 +30,7 @@ class CharactersViewModelTest{
     val instantExecutorRule = InstantTaskExecutorRule()
     private val dispatcher=  StandardTestDispatcher()
     private val charactersRepository: CharacterRepository = mockk()
-    private  val viewModel: CharactersViewModel = CharactersViewModel(charactersRepository)
+    private  lateinit var viewModel: CharactersViewModel
 
     @Before
     fun setUp() {
@@ -70,7 +70,8 @@ class CharactersViewModelTest{
         coEvery { charactersRepository.getCharacters() } returns mockResponse
 
         // When
-        viewModel.retrieveData()
+        viewModel  = CharactersViewModel(charactersRepository)
+//        viewModel.retrieveData()
         dispatcher.scheduler.advanceUntilIdle()
 
         // Run the coroutines
@@ -107,7 +108,7 @@ class CharactersViewModelTest{
         coEvery { charactersRepository.getCharacters() } returns mockResponse
 
         // Call the method to retrieve data
-        viewModel.retrieveData()
+        viewModel  = CharactersViewModel(charactersRepository)
         dispatcher.scheduler.advanceUntilIdle()
 
         coVerify(exactly = 1) { charactersRepository.getCharacters() }
@@ -124,7 +125,7 @@ class CharactersViewModelTest{
         coEvery { charactersRepository.getCharacters() } returns mockResponse
 
         // Call the method to retrieve data
-        viewModel.retrieveData()
+        viewModel  = CharactersViewModel(charactersRepository)
         dispatcher.scheduler.advanceUntilIdle()
         // Verify repository was called
         coVerify(exactly = 1) { charactersRepository.getCharacters() }
@@ -142,7 +143,7 @@ class CharactersViewModelTest{
         coEvery { charactersRepository.getCharacters() } returns mockResponse
 
         // Call the method to retrieve data
-        viewModel.retrieveData()
+        viewModel  = CharactersViewModel(charactersRepository)
         dispatcher.scheduler.advanceUntilIdle()
         // Verify repository was called
         coVerify(exactly = 1) { charactersRepository.getCharacters() }
@@ -193,8 +194,14 @@ class CharactersViewModelTest{
                 species = "human"
             ),
         )
-
+        viewModel  = CharactersViewModel(charactersRepository)
+        dispatcher.scheduler.advanceUntilIdle()
+        coVerify   { charactersRepository.getCharacters() }
         //Update the complete list for filtering
+
+
+
+        // Run the coroutines
         viewModel.setCompleteList(mockCharacterList)
 
         // Perform search

@@ -54,7 +54,10 @@ val viewModelModule = module {
     CharactersViewModel(get())
     }
 }
-
+val testModule = module {
+    // Mock ViewModel or Repository here
+    viewModel { CharactersViewModel(get()) }
+}
 val appModule = listOf(networkModule, localModule, repositoryModule, viewModelModule)
 
 fun providesBaseClient() : OkHttpClient.Builder{

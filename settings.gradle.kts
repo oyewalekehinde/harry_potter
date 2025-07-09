@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Harry Potter"
 include(":app")
- 
+include(":mylibrary")
